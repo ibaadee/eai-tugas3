@@ -72,18 +72,31 @@
 			// Bagian untuk memanggil fungsi LatLonListZipCode
 			// Parameter yang diberikan merupakan Zip Code dari New York
 			// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
-			$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>"10001"));
-			echo "<pre>";
-			print_r($response1);
-			echo "</pre>";
+			function latLonListZipCode($client, $zip_code_list)
+			{
+				return $client->call('LatLonListZipCode', array("zipCodeList"=>$zip_code_list));
+			}
+			print_r(latLonListZipCode($client, "10001"));
 
 			// Bagian untuk memanggil fungsi LatLonListCityNames
 			// Parameter yang diberikan merupakan tingkat kota yang terdapat di US
 			// Return value dari fungsi yang dipanggil adalah daftar latitude, longitude, dan nama kota pada level tertentu
-			$response2 = $client->call('LatLonListCityNames', array("displayLevel"=>1));
-			echo "<pre>";
-			print_r($response2);
-			echo "</pre>";
+			function latLonListCityNames($client, $display_level)
+			{
+				$response = $client->call('LatLonListCityNames', array("displayLevel"=>$display_level));
+				$xml = new SimpleXMLElement($response);
+				
+				$xml_arr = array();
+				foreach($xml->children() as $child)
+				{
+					$xml_arr[$child->getName()] = sprintf("%s", $child); 
+				}
+				
+				$xml_mapped = array_combine(explode(" ", $xml_arr['latLonList']), explode("|", $xml_arr['cityNameList']));
+				return $xml_mapped;
+			}
+			print_r(latLonListCityNames($client, 1));
+			
 			?>
 		</div>
 	</div>
