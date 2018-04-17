@@ -35,16 +35,16 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.php">Home</a>
+					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home
+						<a class="nav-link" href="function1.php">Zip Code
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="function1.php">Zip Code</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="function1.php">City Names</a>
+						<a class="nav-link" href="function2.php">City Names</a>
 					</li>
 				</ul>
 			</div>
@@ -55,42 +55,26 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h1 class="mt-5">Welcome to US Weather </h1>
-				<p class="lead">developed by Ibad Rahadian Saladdin, Ihsan Alfarabi, and Widiarto Adiyoso</p>
+				<h1 class="mt-5">LatLonListZipCode</h1>
+				<p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
+				<ul class="list-unstyled">
+					<li>Bootstrap 4.0.0</li>
+					<li>jQuery 3.3.0</li>
+				</ul>
+				<?php
+					require_once('nusoap/lib/nusoap.php');
+					$client = new nusoap_client('https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php');
+
+					// Bagian untuk memanggil fungsi LatLonListZipCode
+					// Parameter yang diberikan merupakan Zip Code dari New York
+					// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
+					$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>"10001"));
+					echo "<pre>";
+					print_r($response1);
+					echo "</pre>";
+				?>
 			</div>
-			<?php
-			require_once('nusoap/lib/nusoap.php');
-			$client = new nusoap_client('https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php');
 
-			// Bagian untuk memanggil fungsi LatLonListZipCode
-			// Parameter yang diberikan merupakan Zip Code dari New York
-			// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
-			function latLonListZipCode($client, $zip_code_list)
-			{
-				return $client->call('LatLonListZipCode', array("zipCodeList"=>$zip_code_list));
-			}
-			print_r(latLonListZipCode($client, "10001"));
-
-			// Bagian untuk memanggil fungsi LatLonListCityNames
-			// Parameter yang diberikan merupakan tingkat kota yang terdapat di US
-			// Return value dari fungsi yang dipanggil adalah daftar latitude, longitude, dan nama kota pada level tertentu
-			function latLonListCityNames($client, $display_level)
-			{
-				$response = $client->call('LatLonListCityNames', array("displayLevel"=>$display_level));
-				$xml = new SimpleXMLElement($response);
-				
-				$xml_arr = array();
-				foreach($xml->children() as $child)
-				{
-					$xml_arr[$child->getName()] = sprintf("%s", $child); 
-				}
-				
-				$xml_mapped = array_combine(explode(" ", $xml_arr['latLonList']), explode("|", $xml_arr['cityNameList']));
-				return $xml_mapped;
-			}
-			print_r(latLonListCityNames($client, 1));
-			
-			?>
 		</div>
 	</div>
 
