@@ -5,7 +5,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Bare - Start Bootstrap Template</title>
+	<title>Tugas 3 EAI - Kelompok 3</title>
 
 	<!-- Bootstrap core CSS -->
 	<!-- <link href="./css/bootstrap.min.css" rel="stylesheet"> -->
@@ -29,25 +29,22 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
-			<a class="navbar-brand" href="#">Start Bootstrap</a>
+			<a class="navbar-brand" href="#">US Weather Data</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.php">Home</a>
+					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home
+						<a class="nav-link" href="function1.php">Zip Code
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">About</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Services</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="function2.php">City Names</a>
 					</li>
 				</ul>
 			</div>
@@ -58,25 +55,26 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h1 class="mt-5">A Bootstrap 4 Starter Template</h1>
+				<h1 class="mt-5">LatLonListZipCode</h1>
 				<p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
 				<ul class="list-unstyled">
 					<li>Bootstrap 4.0.0</li>
 					<li>jQuery 3.3.0</li>
 				</ul>
-			</div>
-			<?php
-			require_once('nusoap/lib/nusoap.php');
-			$client = new nusoap_client('https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php');
+				<?php
+					require_once('nusoap/lib/nusoap.php');
+					$client = new nusoap_client('https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php');
 
-			// Bagian untuk memanggil fungsi LatLonListZipCode
-			// Parameter yang diberikan merupakan Zip Code dari New York
-			// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
-			$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>"10001"));
-			echo "<pre>";
-			print_r($response1);
-			echo "</pre>";
-			?>
+					// Bagian untuk memanggil fungsi LatLonListZipCode
+					// Parameter yang diberikan merupakan Zip Code dari New York
+					// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
+					$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>"10001"));
+					echo "<pre>";
+					print_r($response1);
+					echo "</pre>";
+				?>
+			</div>
+
 		</div>
 	</div>
 
