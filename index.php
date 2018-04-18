@@ -81,7 +81,7 @@
 					<h3 class="card-header">Function 1</h3>
 					<div class="card-body">
 						<h4 class="card-title">LatLonListZipCode</h4>
-						<p class="card-text">Returns a list of latitude and longitude pairs with each pair corresponding to an input of zip code in USA.</p>
+						<p class="card-text">Returns a list of latitude and longitude pairs with each pair corresponding to an input of zip code in USA. <a href="https://usa.youbianku.com/">Click here for examples.</a></p>
 						<div class="form-group">
 						
 							<!-- Input field untuk memasukkan zip code yang terdapat di USA -->
