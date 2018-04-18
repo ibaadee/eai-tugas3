@@ -2,7 +2,7 @@
 require_once('nusoap/lib/nusoap.php');
 $server = new soap_server();
 
-$namespace = "http://kawung.cs.ui.ac.id/~ibad.rahadian/webservice/server.php";
+$namespace = "http://localhost/webservice/server.php";
 $server->configureWSDL("BooksApp");
 $server->wsdl->schemaTargetNamespace = $namespace;
 
@@ -16,20 +16,18 @@ $server->wsdl->addComplexType(
 		'ID'=>array('name'=>'ID', 'type'=>'xsd:string'),
 		'first_name'=>array('name'=>'first_name', 'type'=>'xsd:string'),
 		'last_name'=>array('name'=>'last_name', 'type'=>'xsd:string'),
-		'email'=>array('name'=>'email', 'type'=>'xsd:string')
+		'email'=>array('name'=>'email', 'type'=>'xsd:string'),
 	)
 );
 
 function get_message($name) {
-   	return "Welcome ".$name;
+	return "Welcome ".$name;
 }
 
-$server->register('get_message');
-
 function get_product($category) {
-	if(category == "books") {
-		$books = join("<br/> ", array(
-			"The Books of Magic",
+	if($category == "books") {
+		$books = join("<br/>", array(
+			"The Books of Magic", 
 			"Black Magic and Curses",
 			"Advance Mastery in Potions Making"
 		));
@@ -38,18 +36,6 @@ function get_product($category) {
 		return "You must read books";
 	}
 }
-
-$server->register(
-	'get_message',
-	array('name'=>'xsd:string'),
-	array('return'=>'xsd:string'),
-	$namespace,
-	false,
-	'rpc',
-	'encoded',
-	'Metode Hello World Sederhana'
-);
-$server->register('get_product');
 
 function reformat_contact($contact) {
 	$contact['ID'] = "KODE".$contact['ID'];
@@ -66,12 +52,32 @@ $server->register(
 	false,
 	'rpc',
 	'encoded',
-	'Metode mengubah isi contact'
+	'Method to change contact values'
 );
 
+$server->register(
+	'get_message', 
+	array('name'=>'xsd:string'),
+	array('return'=>'xsd:string'),
+	$namespace,
+	false,
+	'rpc',
+	'encoded',
+	'Method which is used to get message'
+);
+
+$server->register(
+	'get_product',
+	array('name'=>'xsd:string'),
+	array('return'=>'xsd:string'),
+	$namespace,
+	false,
+	'rpc',
+	'encoded',
+	'Method which is used to get products'
+);
 
 if(!isset($HTTP_RAW_POST_DATA)) $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 $server->service($HTTP_RAW_POST_DATA);
 exit();
-
 ?>
