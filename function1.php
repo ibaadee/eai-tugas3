@@ -64,12 +64,14 @@
 				<?php
 					require_once('nusoap/lib/nusoap.php');
 					$client = new nusoap_client('https://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php');
+					
+					echo "<b>Zipcode Number</b> ".$_GET['zipcode'];
 
 					// Bagian untuk memanggil fungsi LatLonListZipCode
 					// Parameter yang diberikan merupakan Zip Code dari New York
 					// Return value dari fungsi yang dipanggil adalah daftar latitude dan longitude dari New York
-					$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>"10001"));
-					echo "<pre>";
+					$response1 = $client->call('LatLonListZipCode', array("zipCodeList"=>$_GET['zipcode']));
+					echo "<pre><b>Logitude, Latitude </b>";
 					print_r($response1);
 					echo "</pre>";
 				?>
