@@ -1,18 +1,24 @@
 <html lang="en">
 <head>
+	<!-- Metadata halaman web -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
 
+	<!-- Memberi title halaman web -->
 	<title>Tugas 3 EAI - Kelompok 3</title>
 
 	<!-- Bootswatch core CSS -->
+	<!-- Menyiapkan CSS Bootstrap untuk halaman web ini -->
 	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	
 	<!-- DataTables core CSS -->
+	<!-- Menyiapkan CSS DataTables untuk halaman web ini -->
 	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
 
 	<!-- Custom styles for this template -->
+	<!-- Menyiapkan custom styling untuk halaman web ini -->
 	<style>
 		body {
 			padding-top: 54px;
@@ -27,6 +33,7 @@
 
 <body>
 	<!-- Navigation -->
+	<!-- Berisi implementasi Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="#">NOAA National Weather Service</a>
@@ -46,6 +53,7 @@
 	</nav>
 
 	<!-- Page Content -->
+	<!-- Berisi implementasi Card Container Function 1 dan 2 -->
 	<div class="container">
 		<div class="jumbotron text-center" style="margin-top: 32">
 			<h1 class="display-3">Welcome To NOAA National Weather Service</h1>
@@ -54,6 +62,8 @@
 			<p>developed by Ibad Rahadian Saladdin, Ihsan Alfarabi, and Widiarto Adiyoso</p>
 		</div>
 		<div class="row">
+		
+			<!-- Card Container Function 1 -->
 			<div class="col-lg-4">
 				<div class="card border-primary mb-3">
 					<h3 class="card-header">Function 1</h3>
@@ -61,8 +71,11 @@
 						<h4 class="card-title">LatLonListZipCode</h4>
 						<p class="card-text">Returns a list of latitude and longitude pairs with each pair corresponding to an input zip code.</p>
 						<div class="form-group">
+						
+							<!-- Input field untuk memasukkan zip code yang terdapat di USA -->
 							<label for="zip-code">Zip Code</label>
 							<input class="form-control" id="zip-code" aria-describedby="zip-code-help" placeholder="Enter US zip code" type="text">
+						
 						</div>
 						<button id="button-zip-code" class="btn btn-primary">Submit</button>
 					</div>
@@ -71,6 +84,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Card Container Function 2 -->
 			<div class="col-lg-8">
 				<div class="card border-primary mb-3">
 					<h3 class="card-header">Function 2</h3>
@@ -78,6 +93,8 @@
 						<h4 class="card-title">LatLonListCityNames</h4>
 						<p class="card-text">Returns a list of latitude and longitude pairs paired with the city names they correspond to.</p>
 						<div class="form-group">
+						
+							<!-- Berisi daftar tingkat kota di USA -->
 							<label for="display-level">Display Level</label>
 							<select class="custom-select" id="display-level" aria-describedby="display-level-help">
 								<option value="1">1</option>
@@ -85,6 +102,7 @@
 								<option value="3">3</option>
 								<option value="4">4</option>
 							</select>
+							
 						</div>
 						<button id="button-display-level" class="btn btn-primary">Submit</button>
 					</div>
@@ -98,15 +116,21 @@
 	</div>
 
 	<!-- Bootstrap core JavaScript -->
+	<!-- Menyiapkan JQuery dan Boostrap -->
 	<script src="./js/jquery/jquery.min.js"></script>
 	<script src="./js/bootstrap.bundle.min.js"></script>
 
 	<!-- DataTables JavaScript -->
+	<!-- Menyiapkan JS DataTables -->
 	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
 
 	<!-- Custom JavaScript -->
+	<!-- AJAX untuk mengolah Function 1 dan 2 -->
+	<!-- Diintegrasikan dengan Card Container Function 1 dan 2 untuk memberikan dynamic output -->
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
+			// AJAX untuk Function 1
 			$("#button-zip-code").click(function(){
 				let zipCode = $('#zip-code').val();
 				$.get("function1.php",{ q: zipCode }, function(data, status){
@@ -123,6 +147,8 @@
 					resultTag.show();
 				});
 			});
+			
+			// AJAX untuk Function 2
 			$("#button-display-level").click(function(){
 				let displayLevel = $('#display-level').val();
 				$.get("function2.php",{ q: displayLevel }, function(dataAjax, status){
