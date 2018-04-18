@@ -58,12 +58,11 @@
 				<div class="card border-primary mb-3">
 					<h3 class="card-header">Function 1</h3>
 					<div class="card-body">
-						<h4 class="card-title">Primary card title</h4>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<h4 class="card-title">LatLonListZipCode</h4>
+						<p class="card-text">Returns a list of latitude and longitude pairs with each pair corresponding to an input zip code.</p>
 						<div class="form-group">
 							<label for="zip-code">Zip Code</label>
-							<input class="form-control" id="zip-code" aria-describedby="zip-code-help" placeholder="Enter zip code" type="text">
-							<small id="zip-code-help" class="form-text text-muted">We'll never share your email with anyone else.</small>
+							<input class="form-control" id="zip-code" aria-describedby="zip-code-help" placeholder="Enter US zip code" type="text">
 						</div>
 						<button id="button-zip-code" class="btn btn-primary">Submit</button>
 					</div>
@@ -76,8 +75,8 @@
 				<div class="card border-primary mb-3">
 					<h3 class="card-header">Function 2</h3>
 					<div class="card-body">
-						<h4 class="card-title">Primary card title</h4>
-						<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						<h4 class="card-title">LatLonListCityNames</h4>
+						<p class="card-text">Returns a list of latitude and longitude pairs paired with the city names they correspond to.</p>
 						<div class="form-group">
 							<label for="display-level">Display Level</label>
 							<select class="custom-select" id="display-level" aria-describedby="display-level-help">
@@ -86,7 +85,6 @@
 								<option value="3">3</option>
 								<option value="4">4</option>
 							</select>
-							<small id="display-level-help" class="form-text text-muted">We'll never share your email with anyone else.</small>
 						</div>
 						<button id="button-display-level" class="btn btn-primary">Submit</button>
 					</div>
